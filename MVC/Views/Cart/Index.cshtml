@@ -1,0 +1,51 @@
+﻿@model Cart
+
+@if(Model == null || Model.Items.Count==0)
+{
+    <h3>Корзина пустая</h3>
+    <div class="text-decoration-underline">
+        <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
+    </div>
+}
+else
+{
+    <div class="text-centr">
+        <h4>Корзина</h4>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена руб.</th>
+                        <th>Количество</th>
+                        <th>Стоимость руб.</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                <a style="color:navy" href="/product/index/@item.Product.Id"><p>@item.Product.Name</p></a>
+                                <div class="col-1">
+                                    <img class="img-fluid" src="@item.Product.ImagePath">
+                                </div>
+                            </td>
+                            <td>@item.Cost</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-end">
+                <h4>Итого:@Model.Cost руб.</h4>
+            </div>
+            <div class="text-decoration-underline">
+                <a class="btn btn-primary" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-90deg-left">Продолжить покупки</i></a>
+                <a class="btn btn-primary" asp-controller="Order" asp-action="Index">Перейти к оформлению</a>
+            </div>
+        </div>
+    </div>
+}

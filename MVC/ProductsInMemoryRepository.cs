@@ -4,7 +4,7 @@ namespace MVC
 {
     public class ProductsInMemoryRepository
     {
-        private static List<Product> products=new List<Product>()
+        private static List<Product> products = new List<Product>()
         {
             new Product(
                 "ГОРГОРОД",
