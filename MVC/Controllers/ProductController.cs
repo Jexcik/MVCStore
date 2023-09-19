@@ -4,10 +4,10 @@ namespace MVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductsInMemoryRepository productRepository;
-        public ProductController()
+        private readonly IProductsRepository productRepository;
+        public ProductController(IProductsRepository productRepository)
         {
-            productRepository= new ProductsInMemoryRepository();
+            this.productRepository= productRepository;
         }
         public IActionResult Index(int id)
         {

@@ -2,7 +2,7 @@
 
 namespace MVC
 {
-    public class ProductsInMemoryRepository
+    public class ProductsInMemoryRepository : IProductsRepository
     {
         private static List<Product> products = new List<Product>()
         {

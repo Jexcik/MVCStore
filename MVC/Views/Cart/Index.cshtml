@@ -35,6 +35,11 @@ else
                                 </div>
                             </td>
                             <td>@item.Cost</td>
+                            <td>
+                                @item.Amount
+                                <a class="btn btn-outline-secondary btn-sm" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="/cart/del?productId=@item.Product.Id" role="button">-</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -45,6 +50,7 @@ else
             <div class="text-decoration-underline">
                 <a class="btn btn-primary" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-90deg-left">Продолжить покупки</i></a>
                 <a class="btn btn-primary" asp-controller="Order" asp-action="Index">Перейти к оформлению</a>
+                <a class="btn btn-primary" asp-controller="Cart" asp-action="Clear"><i class="bi bi-x-circle">Очистить корзину</i></a>
             </div>
         </div>
     </div>

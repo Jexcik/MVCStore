@@ -2,15 +2,15 @@
 
 namespace MVC
 {
-    public static class CartsInMemoryRepository
+    public class CartsInMemoryRepository : ICartsRepository
     {
-        private static List<Cart> carts = new List<Cart>();
+        private List<Cart> carts = new List<Cart>();
 
-        public static Cart TryGetByUserId(string userId)
+        public Cart TryGetByUserId(string userId)
         {
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
-        public static void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
@@ -45,6 +45,26 @@ namespace MVC
                     });
                 }
             }
+        }
+        public void Del(Product product, string userId)
+        {
+            var existingCart=TryGetByUserId(userId);
+            var existingCartItem=existingCart.Items.FirstOrDefault(item=>item.Product.Id == product.Id);
+            existingCartItem.Amount--;
+            if (existingCartItem.Amount==0) 
+            {
+                existingCart.Items.Remove(existingCartItem);
+            }
+            if(existingCart.Items.Count==0)
+            {
+                carts.Remove(existingCart);
+            }
+        }
+
+        public void Clear(string userId)
+        {
+            var existingCart=TryGetByUserId(userId);
+            carts.Remove(existingCart);
         }
     }
 }

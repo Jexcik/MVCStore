@@ -5,11 +5,11 @@ namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductsInMemoryRepository productRepository;
+        private readonly IProductsRepository productRepository;
 
-        public HomeController()
+        public HomeController(IProductsRepository productsInMemoryRepository)
         {
-            productRepository = new ProductsInMemoryRepository();
+            this.productRepository = productsInMemoryRepository;
         }
 
         public IActionResult Index()

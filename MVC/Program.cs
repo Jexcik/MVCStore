@@ -1,7 +1,13 @@
+using MVC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
+builder.Services.AddSingleton<ICartsRepository,CartsInMemoryRepository>();
+builder.Services.AddTransient<IOrdersRepository, OrdersInMemoryRepository>();
+builder.Services.AddSingleton<Constants>();
 
 var app = builder.Build();
 
