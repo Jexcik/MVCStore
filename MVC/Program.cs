@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IProductsRepository,ProductsInMemoryRepository>();
 builder.Services.AddSingleton<ICartsRepository,CartsInMemoryRepository>();
 builder.Services.AddTransient<IOrdersRepository, OrdersInMemoryRepository>();
+builder.Services.AddSingleton<ICompareRepository, CompareInMemoryRepository>();
 builder.Services.AddSingleton<Constants>();
 
 var app = builder.Build();

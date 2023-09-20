@@ -8,7 +8,7 @@
         <h5>@Model.Cost</h5>
         <h5>@Model.Description</h5>
 
-        <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-        <a class="btn btn-outline-success" href="#" role="button">Добавить в корзину</a>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-90deg-left">Продолжить покупки</i></a>
+        <a class="btn btn-primary" asp-controller="Cart" asp-action="Add" asp-route-productid="@Model.Id"><i class="bi bi-cart">В корзину</i></a>
     </div>
 </div>

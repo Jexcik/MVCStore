@@ -13,7 +13,9 @@
 
                 <p style="font-size:20px">@product.Description</p>
 
-                <a class="btn btn-warning" asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id"> <i class="bi bi-cart"> В корзину </i> </a>
+                <a class="btn btn-outline-success" title="Подробнее о товаре" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id"><i class="bi bi-info-square"></i></a>
+                <a class="btn btn-outline-success" title="Сравнить" asp-controller="Compare" asp-action="Add" asp-route-id="@product.Id"> <i class="bi bi-clipboard2-plus"></i> </a>
+                <a class="btn btn-warning" asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id"><i class="bi bi-cart">В корзину</i></a>
             </div>
         </div>
     }

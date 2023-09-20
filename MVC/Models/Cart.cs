@@ -7,9 +7,16 @@
         public List<CartItem> Items { get; set; }
         public decimal Cost
         {
-            get 
+            get
             {
-                return Items.Sum(item=>item.Cost); 
+                return Items.Sum(item => item.Cost);
+            }
+        }
+        public decimal Amount
+        {
+            get
+            {
+                return Items?.Sum(x => x.Amount) ?? 0;
             }
         }
     }
