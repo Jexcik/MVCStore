@@ -4,22 +4,32 @@ namespace MVC
 {
     public class CartsInMemoryRepository : ICartsRepository
     {
-        private List<Cart> carts = new List<Cart>();
+        private List<Cart> carts = new List<Cart>(); //Список с корзинами всех пользователей
 
+        /// <summary>
+        /// Метод для получения корзины конкертного Usera
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public Cart TryGetByUserId(string userId)
         {
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
+        /// <summary>
+        /// Метод для добавления продукта в корзину
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="userId"></param>
         public void Add(Product product, string userId)
         {
-            var existingCart = TryGetByUserId(userId);
-            if (existingCart == null)
+            var existingCart = TryGetByUserId(userId);//Получаем корзину конкретного пользователя
+            if (existingCart == null) //Если корзина не создана то
             {
-                var newCart = new Cart
+                var newCart = new Cart//Создаем корзину
                 {
-                    UserId = userId,
+                    UserId = userId //Привязываем ее к конкретному пользователю
                 };
-                newCart.Items = new List<CartItem>
+                newCart.Items = new List<CartItem> //Создаем 
                 {
                     new CartItem
                     {
@@ -46,25 +56,30 @@ namespace MVC
                 }
             }
         }
+        /// <summary>
+        /// Метод для удаления конкретного продукта из корзины
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="userId"></param>
         public void Del(Product product, string userId)
         {
-            var existingCart=TryGetByUserId(userId);
-            var existingCartItem=existingCart.Items.FirstOrDefault(item=>item.Product.Id == product.Id);
-            existingCartItem.Amount--;
-            if (existingCartItem.Amount==0) 
+            var existingCart=TryGetByUserId(userId);//Получаем корзину конкретного пользователя
+            var existingCartItem=existingCart.Items.FirstOrDefault(item=>item.Product.Id == product.Id);//Получаем продукт в этой корзине по переданному Id
+            existingCartItem.Amount--;//Уменьшаем колличество едениц конкретной позиции в корзине
+            if (existingCartItem.Amount==0) //Проверяем колличество конкретной позиции в корзине
             {
-                existingCart.Items.Remove(existingCartItem);
+                existingCart.Items.Remove(existingCartItem);//Если в позиции не осталось товара то удаляем эту позицию из списка позиций в корзине 
             }
-            if(existingCart.Items.Count==0)
+            if(existingCart.Items.Count==0)//Проверяем колличество всех позиций в корзине конкретного пользователя
             {
-                carts.Remove(existingCart);
+                //carts.Remove(existingCart); //Удаляем корзину пользователя из списка корзин
             }
         }
 
         public void Clear(string userId)
         {
-            var existingCart=TryGetByUserId(userId);
-            carts.Remove(existingCart);
+            var existingCart=TryGetByUserId(userId);//Получаем корзину конкретного пользователя
+            carts.Remove(existingCart);//Удаляем из списка конкретную корзину
         }
     }
 }
