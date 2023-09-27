@@ -22,5 +22,16 @@ namespace MVC.Controllers
             favoriteRepository.Add(product);
             return RedirectToAction("Index");
         }
+        public IActionResult Del(int id) 
+        {
+            var product=productsRepository.TryGetById(id); //Получаем продукт из списка продуктов по ID
+            favoriteRepository.Del(product);//Удаляем переданный продукт из списка избранных
+            return RedirectToAction("Index");//Переходим к списку избранных
+        }
+        public IActionResult Clear() 
+        {
+            favoriteRepository.Clear();
+            return RedirectToAction("Index");
+        }
     }
 }
