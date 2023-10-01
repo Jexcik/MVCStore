@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -17,7 +18,8 @@ namespace MVC.Areas.Admin.Controllers
         }
         public IActionResult Del(int id)
         {
-            productsRepository.Del(productsRepository.TryGetById(id));
+            Product product = productsRepository.TryGetById(id);
+            productsRepository.Del(product);
             return RedirectToAction("Index");
         }
     }
