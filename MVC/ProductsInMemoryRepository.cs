@@ -34,6 +34,12 @@ namespace MVC
         {
             products.Add(product);
         }
+
+        public void Del(Product product)
+        {
+            products.Remove(product);
+        }
+
         public List<Product> GetAll()
         {
             return products;

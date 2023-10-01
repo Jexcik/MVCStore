@@ -15,5 +15,10 @@ namespace MVC.Areas.Admin.Controllers
             var products = productsRepository.GetAll();
             return View(products);
         }
+        public IActionResult Del(int id)
+        {
+            productsRepository.Del(productsRepository.TryGetById(id));
+            return RedirectToAction("Index");
+        }
     }
 }
