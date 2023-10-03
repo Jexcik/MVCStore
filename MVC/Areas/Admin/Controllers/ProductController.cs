@@ -20,6 +20,13 @@ namespace MVC.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Add(ProductViewModel newProduct)
+        {
+            var products=productsRepository.GetAll();
+            products.Add(new Product(newProduct.Name,",ka",1234,1234,"egftg","fgfhbgjh"));
+            return RedirectToAction("Index");
+        }
         public IActionResult Edit(int id)
         {
             Product product = productsRepository.TryGetById(id);
