@@ -38,8 +38,8 @@
                                     @string.Format("{0:### ### ###}", product.Cost) р
                                 </td>
                                 <td class="col-4 text-end">
-                                    <a class="btn btn-outline-warning" asp-controller="product" asp-action="edit" asp-route-id="@product.Id"><i class="bi bi-pencil"> Редактировать </i></a>
-                                    <a class="btn btn-warning" asp-controller="product" asp-action="del" asp-route-id="@product.Id"> <i class="bi bi-trash-fill"> Удалить </i> </a>
+                                    <a class="btn btn-outline-warning" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"><i class="bi bi-pencil"> Редактировать </i></a>
+                                    <a class="btn btn-warning" asp-controller="Product" asp-action="Del" asp-route-id="@product.Id"> <i class="bi bi-trash-fill"> Удалить </i> </a>
                                 </td>
                             </tr>
                             i++;

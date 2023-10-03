@@ -16,6 +16,25 @@ namespace MVC.Areas.Admin.Controllers
             var products = productsRepository.GetAll();
             return View(products);
         }
+        public IActionResult Add()
+        {
+            return View();
+        }
+        public IActionResult Edit(int id)
+        {
+            Product product = productsRepository.TryGetById(id);
+            return View(product);
+        }
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel product, int id)
+        {
+            Product currentProduct=productsRepository.TryGetById(id);
+            currentProduct.Name = product.Name;
+            currentProduct.Cost = product.Cost;
+            currentProduct.ImagePath = product.ImagePath;
+            currentProduct.Description = product.Description;
+            return RedirectToAction("Index");
+        }
         public IActionResult Del(int id)
         {
             Product product = productsRepository.TryGetById(id);
