@@ -23,8 +23,8 @@ namespace MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel newProduct)
         {
-            var products=productsRepository.GetAll();
-            products.Add(new Product(newProduct.Name,",ka",1234,1234,"egftg","fgfhbgjh"));
+            var products = productsRepository.GetAll();
+            products.Add(new Product(newProduct.Name, newProduct.Author, newProduct.ReleaseYear, newProduct.Cost, newProduct.Description, newProduct.ImagePath));
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int id)
@@ -35,7 +35,7 @@ namespace MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ProductViewModel product, int id)
         {
-            Product currentProduct=productsRepository.TryGetById(id);
+            Product currentProduct = productsRepository.TryGetById(id);
             currentProduct.Name = product.Name;
             currentProduct.Cost = product.Cost;
             currentProduct.ImagePath = product.ImagePath;

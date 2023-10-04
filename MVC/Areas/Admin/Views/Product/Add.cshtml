@@ -4,7 +4,42 @@
     <div class="row">
         <label for="name" class="col-sm-2 col-form-label">Название товара</label>
         <div class="col-sm-3">
-            <input name="Name" type="text" class="form-control" id="name" value="Введите название нового товара" />
+            <input name="Name" type="text" class="form-control" id="name" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label for="author" class="col-sm-2 col-form-label">Имя автора альбома</label>
+        <div class="col-sm-3">
+            <input name="Author" type="text" class="form-control" id="author" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label for="releaseYear" class="col-sm-2 col-form-label">Год издания</label>
+        <div class="col-sm-3">
+            <input name="ReleaseYear" type="number" class="form-control" id="releaseYear" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label for="cost" class="col-sm-2 col-form-label">Стоимость</label>
+        <div class="col-sm-3">
+            <input name="Cost" type="number" class="form-control" id="cost" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label for="description" class="col-sm-2 col-form-label">Описание альбома</label>
+        <div class="col-sm-3">
+            <input name="Description" type="text" class="form-control" id="description" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label for="name" class="col-sm-2 col-form-label">Ссылка на изображение</label>
+        <div class="col-sm-3">
+            <input name="ImagePath" type="text" class="form-control" id="imagePath" />
         </div>
     </div>
     <button type="submit" class="btn btn-primary" asp-controller="Product" asp-action="Add">Добавить</button>
