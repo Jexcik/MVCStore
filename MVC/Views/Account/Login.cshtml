@@ -1,12 +1,15 @@
-﻿
+﻿@model Login
+
 <form method="post">
     <h4>Вход</h4>
     <br />
+    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 
     <div class="row mb-3">
-        <label for="LoginUser" class="col-sm-1 col-form-label">Логин</label><br />
+        <label asp-for="LoginUser" class="col-sm-1 col-form-label">Логин</label><br />
         <div class="col-sm-3">
-            <input type="email" name="LoginUser" class="form-control" />
+            <input asp-for="LoginUser" class="form-control" placeholder="E-Mail  />
+            <span asp-validation-for="LoginUser"></span>
         </div>
     </div>
     <div class="row mb-3">
