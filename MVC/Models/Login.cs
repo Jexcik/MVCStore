@@ -1,9 +1,10 @@
-﻿namespace MVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MVC.Models
 {
-    public class User
+    public class Login
     {
-        public Guid Id { get; set; }
-        public string Login { get; set; }
+        public string LoginUser { get; set; }
         public string Password { get; set; }
         public string CheckBox { get; set; }
         public bool RememberMe { get; set; }

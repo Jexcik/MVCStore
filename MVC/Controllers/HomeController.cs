@@ -14,8 +14,18 @@ namespace MVC.Controllers
 
         public IActionResult Index()
         {
-            var products= productRepository.GetAll();
+            var products = productRepository.GetAll();
             return View(products);
+        }
+        public IActionResult Search(string name)
+        {
+            if (name != null)
+            {
+                List<Product> products = productRepository.GetAll();
+                var findProducts = products.Where(product => product.Name.ToLower().Contains(name.ToLower())).ToList();
+                return View(findProducts);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

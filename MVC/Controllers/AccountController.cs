@@ -10,9 +10,9 @@ namespace MVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(User user)
+        public IActionResult Login(Login user)
         {
-            return Redirect("~/Home/Index");
+                return Redirect("~/Home/Index");
         }
         public IActionResult Register()
         {
