@@ -10,7 +10,7 @@ namespace MVC.Controllers
         private readonly Constants constants;
 
 
-        public OrderController(ICartsRepository cartsRepository,IOrdersRepository ordersRepository, Constants constants)
+        public OrderController(ICartsRepository cartsRepository, IOrdersRepository ordersRepository, Constants constants)
         {
             this.cartsRepository = cartsRepository;
             this.ordersRepository = ordersRepository;
@@ -22,9 +22,29 @@ namespace MVC.Controllers
             return View(cart);
         }
         [HttpPost]
-        public IActionResult Buy(Order order)
+        public IActionResult Buy(UserDeliveryInfo user)
         {
-            order.Cart = cartsRepository.TryGetByUserId(constants.UserId);
+            if (!user.Name.All(c => char.IsLetter(c) || c == ' '))
+            {
+                ModelState.AddModelError("", "ФИО должны содержать только буквы");
+            }
+            if (!user.Phone.All(c => char.IsDigit(c) || "+()- ".Contains(c)))
+            {
+                ModelState.AddModelError("", "Номер телефона может содержать только цифры и символы '+()-'");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View("Index");
+            }
+
+            var existingCart = cartsRepository.TryGetByUserId(constants.UserId);
+            var order = new Order
+            {
+                Name=user.Name,
+                Phone=user.Phone,
+                Email=user.Email,
+                Address=user.Address
+            };
             ordersRepository.Add(order);
             cartsRepository.Clear(constants.UserId);
             return View(order);

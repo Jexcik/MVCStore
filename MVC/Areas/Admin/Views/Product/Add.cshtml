@@ -1,45 +1,54 @@
-﻿<form method="post">
+﻿@model Product
+<form method="post">
     <h4>Добавление нового товара</h4>
     <br />
+    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+
     <div class="row">
-        <label for="name" class="col-sm-2 col-form-label">Название товара</label>
+        <label asp-for="Name" class="col-sm-2 col-form-label">Название товара:</label><br />
         <div class="col-sm-3">
-            <input name="Name" type="text" class="form-control" id="name" />
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="author" class="col-sm-2 col-form-label">Имя автора альбома</label>
+        <label asp-for="Author" class="col-sm-2 col-form-label">Имя автора альбома</label>
         <div class="col-sm-3">
-            <input name="Author" type="text" class="form-control" id="author" />
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="releaseYear" class="col-sm-2 col-form-label">Год издания</label>
+        <label asp-for="ReleaseYear" class="col-sm-2 col-form-label">Год издания</label>
         <div class="col-sm-3">
-            <input name="ReleaseYear" type="number" class="form-control" id="releaseYear" />
+            <input asp-for="ReleaseYear" type="number" class="form-control" />
+            <span asp-validation-for="ReleaseYear"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="cost" class="col-sm-2 col-form-label">Стоимость</label>
+        <label asp-for="Cost" class="col-sm-2 col-form-label">Стоимость</label>
         <div class="col-sm-3">
-            <input name="Cost" type="number" class="form-control" id="cost" />
+            <input asp-for="Cost" type="number" class="form-control" />
+            <span asp-validation-for="Cost"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="description" class="col-sm-2 col-form-label">Описание альбома</label>
+        <label asp-for="Description" class="col-sm-2 col-form-label">Описание альбома</label>
         <div class="col-sm-3">
-            <input name="Description" type="text" class="form-control" id="description" />
+            <input asp-for="Description" type="text" class="form-control" />
+            <span asp-validation-for="Description"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="name" class="col-sm-2 col-form-label">Ссылка на изображение</label>
+        <label asp-for="ImagePath" class="col-sm-2 col-form-label">Ссылка на изображение</label>
         <div class="col-sm-3">
-            <input name="ImagePath" type="text" class="form-control" id="imagePath" />
+            <input asp-for="ImagePath" type="text" class="form-control" />
+            <span asp-validation-for="ImagePath"></span>
         </div>
     </div>
     <button type="submit" class="btn btn-primary" asp-controller="Product" asp-action="Add">Добавить</button>
