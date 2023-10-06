@@ -13,9 +13,14 @@ namespace MVC.Models
         [StringLength(70,MinimumLength =3,ErrorMessage ="Наименование должно содержать от 3 до 70 символов")]
         public string Name { get; set; }
 
-      
+        [Required(ErrorMessage ="Введите автора продукта")]
         public string Author { get; set; }
+
+        [Required(ErrorMessage ="Не указан год релиза")]
+        [Range(2000,2023,ErrorMessage ="Год релиза должен быть в пределах от 2000х до 2023гг")]
         public int ReleaseYear { get; set; }
+
+
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
