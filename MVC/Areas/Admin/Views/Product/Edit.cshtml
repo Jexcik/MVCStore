@@ -3,31 +3,37 @@
 <form method="post">
     <h4>Редактировать товары</h4>
     <br />
+    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+
     <div class="row">
-        <label for="name" class="col-sm-2 col-form-label">Название товара:</label>
+        <label asp-for="Name" class="col-sm-2 col-form-label">Название товара:</label>
         <div class="col-sm-3">
-            <input name="Name" type="text" class="form-control" id="name" value="@Model.Name" />
+            <input asp-for="Name" class="form-control" value="@Model.Name" />
+            <span asp-validation-for="Name"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="cost" class="col-sm-2 col-form-label">Цена товара руб.</label>
+        <label asp-for="Cost" class="col-sm-2 col-form-label">Цена товара руб.</label>
         <div class="col-sm-3">
-            <input name="Cost" type="text" class="form-control" id="cost" value="@Model.Cost">
+            <input asp-for="Cost" class="form-control" value="@Model.Cost">
+            <span asp-validation-for="Cost"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="imagePath" class="col-sm-2 col-form-label">Изображение товара:</label>
+        <label asp-for="ImagePath" class="col-sm-2 col-form-label">Изображение товара:</label>
         <div class="col-sm-3">
-            <input name="ImagePath" type="text" class="form-control" id="imagePath" value="@Model.ImagePath" />
+            <input asp-for="ImagePath" class="form-control" value="@Model.ImagePath" />
+            <span asp-validation-for="ImagePath"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label for="description" class="col-sm-2 col-form-label">Описание товара:</label>
+        <label asp-for="Description" class="col-sm-2 col-form-label">Описание товара:</label>
         <div class="col-sm-3">
-            <input name="Description" type="text" class="form-control" id="description" value="@Model.Description" />
+            <input asp-for="Description" class="form-control" value="@Model.Description" />
+            <span asp-validation-for="Description"></span>
         </div>
     </div>
     <br />

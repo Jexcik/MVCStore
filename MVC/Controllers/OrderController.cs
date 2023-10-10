@@ -18,8 +18,8 @@ namespace MVC.Controllers
         }
         public IActionResult Index()
         {
-            var cart = cartsRepository.TryGetByUserId(constants.UserId);
-            return View(cart);
+            
+            return View();
         }
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
@@ -40,10 +40,9 @@ namespace MVC.Controllers
             var existingCart = cartsRepository.TryGetByUserId(constants.UserId);
             var order = new Order
             {
-                Name=user.Name,
-                Phone=user.Phone,
-                Email=user.Email,
-                Address=user.Address
+                User=user,
+                Items=existingCart.Items,
+                
             };
             ordersRepository.Add(order);
             cartsRepository.Clear(constants.UserId);

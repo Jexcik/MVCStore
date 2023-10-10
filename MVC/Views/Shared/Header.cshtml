@@ -15,7 +15,7 @@
                 </nav>
 
                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"><i class="bi bi-door-open"></i>Войти</a>
-                <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="Order"><i class="bi bi-database-lock"></i>Администратор</a>
+                <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index"><i class="bi bi-database-lock"></i>Администратор</a>
                 <a class="nav-link" asp-area="" asp-controller="Compare" asp-action="Index">Список сравнения @await Component.InvokeAsync("Compare")</a>
                 <a class="nav-link" asp-area="" asp-controller="Favorite" asp-action="Index"><i class="bi bi-star"></i>Избранное @await Component.InvokeAsync("Favorite")</a>
                 <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index"><i class="bi bi-cart4"></i> Корзина @await Component.InvokeAsync("Cart")</a>

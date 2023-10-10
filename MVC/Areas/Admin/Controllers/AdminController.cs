@@ -6,10 +6,6 @@ namespace MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class AdminController : Controller
     {
-        public IActionResult Order()
-        {
-            return View();
-        }
         public IActionResult User()
         {
             return View();

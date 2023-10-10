@@ -23,6 +23,10 @@ namespace MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel newProduct)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Index");
+            }
             var products = productsRepository.GetAll();
             products.Add(new Product(newProduct.Name, newProduct.Author, newProduct.ReleaseYear, newProduct.Cost, newProduct.Description, newProduct.ImagePath));
             return RedirectToAction("Index");
