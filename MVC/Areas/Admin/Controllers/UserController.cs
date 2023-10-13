@@ -4,13 +4,9 @@ using System.Reflection.Metadata.Ecma335;
 namespace MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminController : Controller
+    public class UserController : Controller
     {
-        public IActionResult User()
-        {
-            return View();
-        }
-        public IActionResult Roles()
+        public IActionResult Index()
         {
             return View();
         }

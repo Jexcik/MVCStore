@@ -20,7 +20,7 @@ namespace MVC.Controllers
         {
             var product = productsRepository.TryGetById(id);
             favoriteRepository.Add(product);
-            return RedirectToAction("Index");
+            return Redirect("~/Home/Index");
         }
         public IActionResult Del(int id) 
         {

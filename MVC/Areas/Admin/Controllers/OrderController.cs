@@ -16,5 +16,20 @@ namespace MVC.Areas.Admin.Controllers
             var orders= ordersRepository.GetAllOrders();
             return View(orders);
         }
+        public IActionResult EditStatus(Guid id)
+        {
+            var orders = ordersRepository.GetAllOrders();
+            var currentOrder=orders.FirstOrDefault(order=>order.Id==id);
+            return View(currentOrder);
+        }
+        [HttpPost]
+        public IActionResult EditStatus(Guid id,OrderStatuses Status)
+        {
+            var orders = ordersRepository.GetAllOrders();
+            var currentOrder = orders.FirstOrDefault(order => order.Id == id);
+            currentOrder.Status = Status;
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -4,7 +4,7 @@ namespace MVC
 {
     public class CompareInMemoryRepository : ICompareRepository
     {
-        public List<Product> Compare = new List<Product>();
+        private List<Product> Compare = new List<Product>();
         public List<Product> GetAllCompare() //Метод для получения списка продуктов для сравнения
         {
             return Compare;

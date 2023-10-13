@@ -38,7 +38,8 @@
                                 <tr>
                                     <td>@i</td>
                                     <td>@string.Format("{0:### ### ###}",order.Cost)p</td>
-                                    @switch (order.Status)
+                                    <td>@EnumHelper.GetDisplayName(order.Status)</td>
+@*                                     @switch (order.Status)
                                     {
                                         case OrderStatuses.Created:
                                             <td>Создан</td>
@@ -56,11 +57,11 @@
                                             <td>Отменен</td>
                                             ; break;
                                     }
-                                    <td>@order.User.Name</td>
+ *@                                    <td>@order.User.Name</td>
                                     <td>@order.Date</td>
                                     <td>@order.Time</td>
                                     <td class="col-4 text-end">
-                                        <a class="btn btn-outline-warning" asp-controller="Order" asp-action="EditStatus" asp-asp-route-itemid="@order.Id"><i class="bi bi-pencil">Изменить статус</i></a>
+                                        <a class="btn btn-outline-warning" asp-controller="Order" asp-action="EditStatus" asp-route-id="@order.Id"><i class="bi bi-pencil">Изменить статус</i></a>
                                     </td>
                                 </tr>
                                 i += 1;

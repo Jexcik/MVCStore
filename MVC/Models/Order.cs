@@ -1,11 +1,18 @@
-﻿namespace MVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MVC.Models
 {
     public enum OrderStatuses
     {
+        [Display(Name ="Создан")]
         Created,
+        [Display(Name = "Обработан")]
         Processed,
+        [Display(Name = "В пути")]
         Delivering,
+        [Display(Name = "Доставлен")]
         Delivered,
+        [Display(Name = "Отменен")]
         Canceled
     }
     public class Order
