@@ -1,4 +1,5 @@
-﻿using MVC.Models;
+﻿using MVC.Db.Models;
+using MVC.Models;
 
 namespace MVC
 {

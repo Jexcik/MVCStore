@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
+using MVC.Db.Models;
 using MVC.Models;
 
 namespace MVC.Controllers
@@ -15,7 +17,8 @@ namespace MVC.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAll();
-            return View(products);
+            var productsViewModels = products.Select(x =>new ProductViewModel() { Id=x.Id, Name=x.Name, Author=x.Author, ReleaseYear=x.ReleaseYear, Cost=x.Cost, Description=x.Description, ImagePath=x.ImagePath}).ToList();
+            return View(productsViewModels);
         }
         public IActionResult Search(string name)
         {

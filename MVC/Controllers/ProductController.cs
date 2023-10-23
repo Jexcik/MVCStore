@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -7,12 +9,21 @@ namespace MVC.Controllers
         private readonly IProductsRepository productRepository;
         public ProductController(IProductsRepository productRepository)
         {
-            this.productRepository= productRepository;
+            this.productRepository = productRepository;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index(Guid id)
         {
-            var product= productRepository.TryGetById(id) ;
-            return View(product);
+            var product = productRepository.TryGetById(id);
+            ProductViewModel productViewModel = new ProductViewModel()
+            {
+                Name = product.Name,
+                Author = product.Author,
+                ReleaseYear = product.ReleaseYear,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagePath = product.ImagePath
+            };
+            return View(productViewModel);
         }
     }
 }

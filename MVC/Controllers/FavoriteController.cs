@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
 
 namespace MVC.Controllers
 {
@@ -16,13 +17,13 @@ namespace MVC.Controllers
             var favoriteList = favoriteRepository.GetAll();
             return View(favoriteList);
         }
-        public IActionResult Add(int id)
+        public IActionResult Add(Guid id)
         {
             var product = productsRepository.TryGetById(id);
             favoriteRepository.Add(product);
             return Redirect("~/Home/Index");
         }
-        public IActionResult Del(int id) 
+        public IActionResult Del(Guid id) 
         {
             var product=productsRepository.TryGetById(id); //Получаем продукт из списка продуктов по ID
             favoriteRepository.Del(product);//Удаляем переданный продукт из списка избранных

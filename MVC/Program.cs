@@ -1,10 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using MVC;
+using MVC.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Получаем строку подключения из файла конфигурации
+var connection = builder.Configuration.GetConnectionString("MVC_Shop");
+
+//Добавляем DatabaseContext в качестве сервиса в приложение
+builder.Services.AddDbContext<DatabaseContext>(options=>options.UseSqlServer(connection));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IProductsRepository, ProductsInMemoryRepository>();
+builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
 builder.Services.AddSingleton<ICartsRepository, CartsInMemoryRepository>();
 builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
 builder.Services.AddSingleton<ICompareRepository, CompareInMemoryRepository>();

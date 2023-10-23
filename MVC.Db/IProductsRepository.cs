@@ -1,6 +1,6 @@
-﻿using MVC.Models;
+﻿using MVC.Db.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public interface IProductsRepository
     {
@@ -13,6 +13,6 @@ namespace MVC
         /// </summary>
         /// <param name="id">ID продукта</param>
         /// <returns></returns>
-        Product TryGetById(int id);
+        Product TryGetById(Guid id);
     }
 }

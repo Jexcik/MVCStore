@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
 
 namespace MVC.Controllers
 {
@@ -18,13 +19,13 @@ namespace MVC.Controllers
             var cart = cartsRepository.TryGetByUserId(constants.UserId);
             return View(cart);
         }
-        public IActionResult Add(int productId) 
+        public IActionResult Add(Guid productId) 
         {
             var product=productsRepository.TryGetById(productId);
             cartsRepository.Add(product,constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Del(int productId) 
+        public IActionResult Del(Guid productId) 
         {
             var product=productsRepository.TryGetById(productId);
             cartsRepository.Del(product,constants.UserId);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
 
 namespace MVC.Controllers
 {
@@ -18,13 +19,13 @@ namespace MVC.Controllers
             var compareList = compareRepository.GetAllCompare(); //Получаем список всех товаров добавленных в сравнение
             return View(compareList);//Передаем в представление список товаров для сравнения
         }
-        public IActionResult Add(int id)
+        public IActionResult Add(Guid id)
         {
             var product = productsRepository.TryGetById(id); //Получаем продукт по ID
             compareRepository.Add(product);//Добавляем в список для сравнения переданный продукт
             return RedirectToAction("Index");//Переходим на страницу с списком для сравнения
         }
-        public IActionResult Del(int id)
+        public IActionResult Del(Guid id)
         {
             var product = productsRepository.TryGetById(id);//Получаем продукт по ID
             compareRepository.Del(product);//Удаляем из списка сравнения переданный продукт

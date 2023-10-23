@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
+using MVC.Db.Models;
 using MVC.Models;
 
 namespace MVC.Areas.Admin.Controllers
@@ -13,8 +15,9 @@ namespace MVC.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var products = productsRepository.GetAll();
-            return View(products);
+            var productsDb = productsRepository.GetAll();
+            var productsViewModels=productsDb.Select(x => new ProductViewModel() { Id=x.Id, Name=x.Name, Author=x.Author, Cost=x.Cost, ReleaseYear=x.ReleaseYear, Description=x.Description, ImagePath=x.ImagePath }).ToList();
+            return View(productsViewModels);
         }
         public IActionResult Add()
         {
@@ -27,17 +30,16 @@ namespace MVC.Areas.Admin.Controllers
             {
                 return View("Index");
             }
-            var products = productsRepository.GetAll();
-            products.Add(new Product(newProduct.Name, newProduct.Author, newProduct.ReleaseYear, newProduct.Cost, newProduct.Description, newProduct.ImagePath));
+            productsRepository.Add(new Product() { Name = newProduct.Name, Author = newProduct.Author, ReleaseYear = newProduct.ReleaseYear, Cost=newProduct.Cost, Description=newProduct.Description, ImagePath=newProduct.ImagePath });
             return RedirectToAction("Index");
         }
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             Product product = productsRepository.TryGetById(id);
             return View(product);
         }
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product, int id)
+        public IActionResult Edit(ProductViewModel product, Guid id)
         {
             Product currentProduct = productsRepository.TryGetById(id);
             currentProduct.Name = product.Name;
@@ -46,7 +48,7 @@ namespace MVC.Areas.Admin.Controllers
             currentProduct.Description = product.Description;
             return RedirectToAction("Index");
         }
-        public IActionResult Del(int id)
+        public IActionResult Del(Guid id)
         {
             Product product = productsRepository.TryGetById(id);
             productsRepository.Del(product);
