@@ -12,6 +12,7 @@ namespace MVC.Db
     public class DatabaseContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

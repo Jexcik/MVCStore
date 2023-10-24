@@ -39,5 +39,19 @@ namespace MVC.Db
         {
             return databaseContext.Products.FirstOrDefault(product => product.Id == id);
         }
+
+        public void Update(Product product, Guid Id)
+        {
+            var existingProduct= databaseContext.Products.FirstOrDefault(x=>x.Id == Id);
+            if (existingProduct == null) 
+            {
+                return;
+            }
+            existingProduct.Name = product.Name;
+            existingProduct.Cost = product.Cost;
+            existingProduct.Description = product.Description;
+            existingProduct.ImagePath=product.ImagePath;
+            databaseContext.SaveChanges();
+        }
     }
 }

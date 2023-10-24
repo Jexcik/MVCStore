@@ -1,10 +1,17 @@
-﻿using MVC.Db.Models;
-using MVC.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC.Db;
+using MVC.Db.Models;
 
 namespace MVC
 {
-    public class FavoriteInMemoryRepository : IFavoriteRepository
+    public class FavoriteDbRepository : IFavoriteRepository
     {
+        private readonly DatabaseContext databaseContext;
+        public FavoriteDbRepository(DatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
+
         public List<Product> favorite = new List<Product>(); //Заводим список в который будем добавлять избранные продукты
 
         /// <summary>
@@ -37,9 +44,9 @@ namespace MVC
         /// Метод для получения списка избранных товаров
         /// </summary>
         /// <returns></returns>
-        public List<Product> GetAll()
+        public List<Product> GetAll(string UserId)
         {
-            return favorite;
+            return databaseContext.FavoriteProducts.Where(x=>x.UserId==UserId).Include(x=>x.Product).Select(x=>x.Product).ToList();
         }
     }
 }

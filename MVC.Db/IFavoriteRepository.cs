@@ -1,5 +1,4 @@
 ﻿using MVC.Db.Models;
-using MVC.Models;
 
 namespace MVC
 {
@@ -9,7 +8,7 @@ namespace MVC
         /// Метод для получения всего списка Избранных товаров
         /// </summary>
         /// <returns></returns>
-        List<Product> GetAll();
+        List<Product> GetAll(string UserId);
         /// <summary>
         /// Метод для добавления выбранного продукта в список избранных
         /// </summary>

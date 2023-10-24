@@ -39,13 +39,9 @@ namespace MVC.Areas.Admin.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product, Guid id)
+        public IActionResult Edit(Product product, Guid id)
         {
-            Product currentProduct = productsRepository.TryGetById(id);
-            currentProduct.Name = product.Name;
-            currentProduct.Cost = product.Cost;
-            currentProduct.ImagePath = product.ImagePath;
-            currentProduct.Description = product.Description;
+            productsRepository.Update(product,id);
             return RedirectToAction("Index");
         }
         public IActionResult Del(Guid id)

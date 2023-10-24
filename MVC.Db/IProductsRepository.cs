@@ -14,5 +14,6 @@ namespace MVC.Db
         /// <param name="id">ID продукта</param>
         /// <returns></returns>
         Product TryGetById(Guid id);
+        void Update(Product product, Guid Id);
     }
 }

@@ -1,4 +1,4 @@
-﻿@using MVC.Db.Models;
+﻿@using MVC.Db.Models
 @model Product
 
 <form method="post">
@@ -7,7 +7,7 @@
     <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 
     <div class="row">
-        <label asp-for="Name" class="col-sm-2 col-form-label">Название товара:</label>
+        <label asp-for="Name" class="col-sm-2 col-form-label">Название альбома:</label>
         <div class="col-sm-3">
             <input asp-for="Name" class="form-control" value="@Model.Name" />
             <span asp-validation-for="Name"></span>
@@ -15,7 +15,7 @@
     </div>
     <br />
     <div class="row">
-        <label asp-for="Cost" class="col-sm-2 col-form-label">Цена товара руб.</label>
+        <label asp-for="Cost" class="col-sm-2 col-form-label">Цена альбома руб.</label>
         <div class="col-sm-3">
             <input asp-for="Cost" class="form-control" value="@Model.Cost">
             <span asp-validation-for="Cost"></span>
@@ -23,18 +23,18 @@
     </div>
     <br />
     <div class="row">
-        <label asp-for="ImagePath" class="col-sm-2 col-form-label">Изображение товара:</label>
+        <label asp-for="Description" class="col-sm-2 col-form-label">Описание альбома:</label>
         <div class="col-sm-3">
-            <input asp-for="ImagePath" class="form-control" value="@Model.ImagePath" />
-            <span asp-validation-for="ImagePath"></span>
+            <input asp-for="Description" class="form-control" value="@Model.Description" />
+            <span asp-validation-for="Description"></span>
         </div>
     </div>
     <br />
     <div class="row">
-        <label asp-for="Description" class="col-sm-2 col-form-label">Описание товара:</label>
+        <label asp-for="ImagePath" class="col-sm-2 col-form-label">Изображение альбома:</label>
         <div class="col-sm-3">
-            <input asp-for="Description" class="form-control" value="@Model.Description" />
-            <span asp-validation-for="Description"></span>
+            <input asp-for="ImagePath" class="form-control" value="@Model.ImagePath" />
+            <span asp-validation-for="ImagePath"></span>
         </div>
     </div>
     <br />
