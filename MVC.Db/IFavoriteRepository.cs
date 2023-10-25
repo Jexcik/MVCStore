@@ -13,7 +13,7 @@ namespace MVC
         /// Метод для добавления выбранного продукта в список избранных
         /// </summary>
         /// <param name="product"></param>
-        void Add(Product product);
+        void Add(string UserId,Product product);
         /// <summary>
         /// Метод для удаление выбранного продукта из списка товаров
         /// </summary>

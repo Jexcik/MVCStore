@@ -2,7 +2,7 @@
 
 namespace MVC.Models
 {
-    public class CartItem
+    public class CartItemViewModel
     {
         public int Id { get; set; }
         public Product Product { get; set; }

@@ -1,11 +1,20 @@
-﻿using MVC.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC.Db;
+using MVC.Db.Models;
 using MVC.Models;
 
 namespace MVC
 {
-    public class CartsInMemoryRepository : ICartsRepository
+    public class CartsDbRepository : ICartsRepository
     {
         private List<Cart> carts = new List<Cart>(); //Список с корзинами всех пользователей
+
+        private DatabaseContext databaseContext;
+
+        public CartsDbRepository(DatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
 
         /// <summary>
         /// Метод для получения корзины конкертного Usera
@@ -14,7 +23,7 @@ namespace MVC
         /// <returns></returns>
         public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(cart => cart.UserId == userId);
         }
         /// <summary>
         /// Метод для добавления продукта в корзину
@@ -34,28 +43,29 @@ namespace MVC
                 {
                     new CartItem
                     {
-                        Amount=1,
+                        Quantity=1,
                         Product=product
                     }
                 };
-                carts.Add(newCart);
+                databaseContext.Carts.Add(newCart);
             }
             else
             {
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
                 if (existingCartItem != null)
                 {
-                    existingCartItem.Amount += 1;
+                    existingCartItem.Quantity += 1;
                 }
                 else
                 {
                     existingCart.Items.Add(new CartItem
                     {
-                        Amount = 1,
+                        Quantity = 1,
                         Product = product
                     });
                 }
             }
+            databaseContext.SaveChanges();
         }
         /// <summary>
         /// Метод для удаления конкретного продукта из корзины
@@ -64,23 +74,25 @@ namespace MVC
         /// <param name="userId"></param>
         public void Del(Product product, string userId)
         {
-            var existingCart=TryGetByUserId(userId);//Получаем корзину конкретного пользователя
-            var existingCartItem=existingCart.Items.FirstOrDefault(item=>item.Product.Id == product.Id);//Получаем продукт в этой корзине по переданному Id
-            existingCartItem.Amount--;//Уменьшаем колличество едениц конкретной позиции в корзине
-            if (existingCartItem.Amount==0) //Проверяем колличество конкретной позиции в корзине
+            var existingCart = TryGetByUserId(userId);//Получаем корзину конкретного пользователя
+            var existingCartItem = existingCart?.Items?.FirstOrDefault(item => item.Product.Id == product.Id);//Получаем продукт в этой корзине по переданному Id
+            existingCartItem.Quantity--;//Уменьшаем колличество едениц конкретной позиции в корзине
+            if (existingCartItem.Quantity == 0) //Проверяем колличество конкретной позиции в корзине
             {
                 existingCart.Items.Remove(existingCartItem);//Если в позиции не осталось товара то удаляем эту позицию из списка позиций в корзине 
             }
-            if(existingCart.Items.Count==0)//Проверяем колличество всех позиций в корзине конкретного пользователя
+            if (existingCart.Items.Count == 0)//Проверяем колличество всех позиций в корзине конкретного пользователя
             {
-                //carts.Remove(existingCart); //Удаляем корзину пользователя из списка корзин
+                databaseContext.Carts.Remove(existingCart); //Удаляем корзину пользователя из списка корзин
             }
+            databaseContext.SaveChanges();
         }
 
         public void Clear(string userId)
         {
-            var existingCart=TryGetByUserId(userId);//Получаем корзину конкретного пользователя
-            carts.Remove(existingCart);//Удаляем из списка конкретную корзину
+            var existingCart = TryGetByUserId(userId);//Получаем корзину конкретного пользователя
+            databaseContext.Carts.Remove(existingCart);//Удаляем из списка конкретную корзину
+            databaseContext.SaveChanges();
         }
     }
 }

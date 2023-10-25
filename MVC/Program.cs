@@ -8,15 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 var connection = builder.Configuration.GetConnectionString("MVC_Shop");
 
 //ƒобавл€ем DatabaseContext в качестве сервиса в приложение
-builder.Services.AddDbContext<DatabaseContext>(options=>options.UseSqlServer(connection));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
-builder.Services.AddSingleton<ICartsRepository, CartsInMemoryRepository>();
+builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();
 builder.Services.AddSingleton<IOrdersRepository, OrdersInMemoryRepository>();
 builder.Services.AddSingleton<ICompareRepository, CompareInMemoryRepository>();
-builder.Services.AddSingleton<IFavoriteRepository, FavoriteInMemoryRepository>();
+builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<Constants>();
 

@@ -18,25 +18,27 @@ namespace MVC
         /// Метод для добавления избранного продукта в список
         /// </summary>
         /// <param name="product"></param>
-        
-        public void Add(Product product)
+
+        public void Add(string UserId, Product product)
         {
-            if (!favorite.Contains(product))
+            var existingProduct = databaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == UserId && x.Product.Id == product.Id);
+            if (existingProduct == null)
             {
-                favorite.Add(product);
+                databaseContext.FavoriteProducts.Add(new FavoriteProduct { Product = product, UserId = UserId });
+                databaseContext.SaveChanges();
             }
         }
         /// <summary>
         /// Метод для удаления избранного продукта из списка
         /// </summary>
         /// <param name="product"></param>
-        
+
         public void Del(Product product)
         {
             favorite.Remove(product);
         }
         /// <summary>
-        /// Метод для отчистки списка избранных товаров
+        /// Метод для очистки списка избранных товаров
         /// </summary>
         public void Clear() => favorite.Clear();
 
@@ -46,7 +48,7 @@ namespace MVC
         /// <returns></returns>
         public List<Product> GetAll(string UserId)
         {
-            return databaseContext.FavoriteProducts.Where(x=>x.UserId==UserId).Include(x=>x.Product).Select(x=>x.Product).ToList();
+            return databaseContext.FavoriteProducts.Where(x => x.UserId == UserId).Include(x => x.Product).Select(x => x.Product).ToList();
         }
     }
 }
