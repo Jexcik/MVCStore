@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Db;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -10,28 +11,29 @@ namespace MVC.Controllers
         private readonly Constants constants;
         public CartController(IProductsRepository productsRepository, ICartsRepository cartsRepository, Constants constants)
         {
-            this.productsRepository= productsRepository;
+            this.productsRepository = productsRepository;
             this.cartsRepository = cartsRepository;
             this.constants = constants;
         }
         public IActionResult Index()
         {
             var cart = cartsRepository.TryGetByUserId(constants.UserId);
-            return View(cart);
+            var cartViewModel = new CartViewModel { Id = cart.Id, Items = cart.Items.Select(x => new CartItemViewModel() { Id = x.Id, Product = x.Product, Amount = x.Quantity }).ToList(), UserId = cart.UserId };
+            return View(cartViewModel);
         }
-        public IActionResult Add(Guid productId) 
+        public IActionResult Add(Guid productId)
         {
-            var product=productsRepository.TryGetById(productId);
-            cartsRepository.Add(product,constants.UserId);
+            var product = productsRepository.TryGetById(productId);
+            cartsRepository.Add(product, constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Del(Guid productId) 
+        public IActionResult Del(Guid productId)
         {
-            var product=productsRepository.TryGetById(productId);
-            cartsRepository.Del(product,constants.UserId);
+            var product = productsRepository.TryGetById(productId);
+            cartsRepository.Del(product, constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear() 
+        public IActionResult Clear()
         {
             cartsRepository.Clear(constants.UserId);
             return RedirectToAction("Index");
