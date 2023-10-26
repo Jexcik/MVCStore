@@ -15,10 +15,10 @@ namespace MVC.Models
         [Display(Name = "Отменен")]
         Canceled
     }
-    public class Order
+    public class OrderViewModel
     {
         public Guid Id { get; set; }
-        public UserDeliveryInfo User { get; set; }
+        public UserDeliveryInfoViewModel User { get; set; }
 
         public List<CartItemViewModel> Items { get; set; }
         public decimal Cost
@@ -32,7 +32,7 @@ namespace MVC.Models
         public string Time { get; set; }
         public string Date { get; set; }
 
-        public Order()
+        public OrderViewModel()
         {
             Id = Guid.NewGuid();
             Status = OrderStatuses.Created;

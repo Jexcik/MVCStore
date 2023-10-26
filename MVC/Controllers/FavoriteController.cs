@@ -7,31 +7,34 @@ namespace MVC.Controllers
     {
         private readonly IFavoriteRepository favoriteRepository;
         private readonly IProductsRepository productsRepository;
-        public FavoriteController(IProductsRepository productsRepository, IFavoriteRepository favoriteRepository)
+        private readonly Constants constants;
+        
+        public FavoriteController(IProductsRepository productsRepository, IFavoriteRepository favoriteRepository, Constants constants)
         {
             this.favoriteRepository = favoriteRepository;
             this.productsRepository = productsRepository;
+            this.constants = constants;
         }
         public IActionResult Index()
         {
-            var favoriteList = favoriteRepository.GetAll();
+            var favoriteList = favoriteRepository.GetAll(constants.UserId);
             return View(favoriteList);
         }
         public IActionResult Add(Guid id)
         {
             var product = productsRepository.TryGetById(id);
-            favoriteRepository.Add(product);
+            favoriteRepository.Add(constants.UserId,product);
             return Redirect("~/Home/Index");
         }
         public IActionResult Del(Guid id) 
         {
             var product=productsRepository.TryGetById(id); //Получаем продукт из списка продуктов по ID
-            favoriteRepository.Del(product);//Удаляем переданный продукт из списка избранных
+            favoriteRepository.Del(constants.UserId,id);//Удаляем переданный продукт из списка избранных
             return RedirectToAction("Index");//Переходим к списку избранных
         }
         public IActionResult Clear() 
         {
-            favoriteRepository.Clear();
+            favoriteRepository.Clear(constants.UserId);
             return RedirectToAction("Index");
         }
     }

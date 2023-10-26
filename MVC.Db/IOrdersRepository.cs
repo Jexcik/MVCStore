@@ -1,6 +1,6 @@
-﻿using MVC.Models;
+﻿using MVC.Db.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public interface IOrdersRepository
     {

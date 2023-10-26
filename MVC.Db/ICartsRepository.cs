@@ -1,7 +1,6 @@
 ﻿using MVC.Db.Models;
-using MVC.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public interface ICartsRepository
     {

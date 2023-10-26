@@ -2,7 +2,7 @@
 
 namespace MVC.Models
 {
-    public class UserDeliveryInfo
+    public class UserDeliveryInfoViewModel
     {
         [Required(ErrorMessage ="Поле Ф.И.О. должно быть заполнено")]
         [StringLength(70,MinimumLength =3,ErrorMessage ="ФИО должно содержать от 3 до 70 символов")]

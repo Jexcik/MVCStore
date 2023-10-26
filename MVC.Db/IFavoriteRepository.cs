@@ -1,6 +1,6 @@
 ﻿using MVC.Db.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public interface IFavoriteRepository
     {
@@ -18,11 +18,11 @@ namespace MVC
         /// Метод для удаление выбранного продукта из списка товаров
         /// </summary>
         /// <param name="product"></param>
-        void Del(Product product);
+        void Del(string UserId, Guid productId);
         
         /// <summary>
         /// Метод для очистки списка избранных товаров
         /// </summary>
-        void Clear();
+        void Clear(string UserId);
     }
 }

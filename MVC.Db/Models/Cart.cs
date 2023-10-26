@@ -1,4 +1,4 @@
-﻿namespace MVC.Models
+﻿namespace MVC.Db.Models
 {
     public class Cart
     {

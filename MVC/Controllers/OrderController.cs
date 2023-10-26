@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
+using MVC.Db.Models;
+using MVC.Db;
 
 namespace MVC.Controllers
 {
@@ -22,7 +24,7 @@ namespace MVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfo user)
+        public IActionResult Buy(UserDeliveryInfoViewModel user)
         {
             if (!user.Name.All(c => char.IsLetter(c) || c == ' '))
             {
@@ -40,9 +42,9 @@ namespace MVC.Controllers
             var existingCart = cartsRepository.TryGetByUserId(constants.UserId);
             var order = new Order
             {
-                User=user,
-                Items=existingCart.Items,
                 
+                Items = existingCart.Items,
+
             };
             ordersRepository.Add(order);
             cartsRepository.Clear(constants.UserId);

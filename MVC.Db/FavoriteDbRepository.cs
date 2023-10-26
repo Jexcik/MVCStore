@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVC.Db;
 using MVC.Db.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public class FavoriteDbRepository : IFavoriteRepository
     {
@@ -33,14 +32,21 @@ namespace MVC
         /// </summary>
         /// <param name="product"></param>
 
-        public void Del(Product product)
+        public void Del(string UserId, Guid productId)
         {
-            favorite.Remove(product);
+            var removingFavorite= databaseContext.FavoriteProducts.FirstOrDefault(u=>u.UserId == UserId && u.Product.Id == productId);
+            databaseContext.FavoriteProducts.Remove(removingFavorite);
+            databaseContext.SaveChanges();
         }
         /// <summary>
         /// Метод для очистки списка избранных товаров
         /// </summary>
-        public void Clear() => favorite.Clear();
+        public void Clear(string UserId)
+        {
+            var userFavoriteProducts=databaseContext.FavoriteProducts.Where(u=>u.UserId == UserId).ToList();
+            databaseContext.FavoriteProducts.RemoveRange(userFavoriteProducts);
+            databaseContext.SaveChanges();
+        }
 
         /// <summary>
         /// Метод для получения списка избранных товаров
@@ -48,7 +54,10 @@ namespace MVC
         /// <returns></returns>
         public List<Product> GetAll(string UserId)
         {
-            return databaseContext.FavoriteProducts.Where(x => x.UserId == UserId).Include(x => x.Product).Select(x => x.Product).ToList();
+            return databaseContext.FavoriteProducts.Where(x => x.UserId == UserId)
+                .Include(x => x.Product)
+                .Select(x => x.Product)
+                .ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.Db;
 
 namespace MVC.Views.Shared.Components.Cart
 {
@@ -15,7 +16,7 @@ namespace MVC.Views.Shared.Components.Cart
         public IViewComponentResult Invoke()
         {
             var cart = cartsRepository.TryGetByUserId(constants.UserId);
-            var productCounts = cart?.Amount;
+            var productCounts = cart?.Items.Count;
 
             return View("Cart", productCounts);
         }

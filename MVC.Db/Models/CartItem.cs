@@ -1,6 +1,6 @@
 ﻿using MVC.Db.Models;
 
-namespace MVC.Models
+namespace MVC.Db.Models
 {
     public class CartItem
     {

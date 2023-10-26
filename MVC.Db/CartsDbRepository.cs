@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVC.Db;
 using MVC.Db.Models;
-using MVC.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public class CartsDbRepository : ICartsRepository
     {

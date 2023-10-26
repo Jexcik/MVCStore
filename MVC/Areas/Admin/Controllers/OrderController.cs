@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
+using MVC.Db;
+using MVC.Db.Models;
 
 namespace MVC.Areas.Admin.Controllers
 {
