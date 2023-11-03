@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Db;
+using MVC.Helpers;
 using MVC.Models;
 
 namespace MVC.Views.Shared.Components.Cart
@@ -17,10 +18,10 @@ namespace MVC.Views.Shared.Components.Cart
         public IViewComponentResult Invoke()
         {
             var cart = cartsRepository.TryGetByUserId(constants.UserId);
-            var cartViewModel = new CartViewModel { Id = cart.Id, Items = cart.Items.Select(x => new CartItemViewModel { Id = x.Id, Product = x.Product, Amount = x.Quantity }).ToList(), UserId = cart.UserId }?.Amount;
-            var productCounts = cart?.Items;
+            var cartViewModel = Mapping.ToCartViewModel(cart);
+            var productCounts = cartViewModel?.Amount ?? 0;
 
-            return View("Cart", cartViewModel);
+            return View("Cart", productCounts);
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using MVC.Db.Models;
-using MVC.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public interface ICompareRepository
     {
-        void Add(Product product);
+        void Add(string userId, Product product);
         void Clear();
         void Del(Product product);
-        List<Product> GetAllCompare();
+        List<Product> GetAllCompare(string userId);
     }
 }

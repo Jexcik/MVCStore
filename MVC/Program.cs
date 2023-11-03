@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsRepository, CartsDbRepository>();
 builder.Services.AddTransient<IOrdersRepository, OrdersDbRepository>();
-builder.Services.AddSingleton<ICompareRepository, CompareInMemoryRepository>();
+builder.Services.AddTransient<ICompareRepository, CompareDbRepository>();
 builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
 builder.Services.AddSingleton<Constants>();

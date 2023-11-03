@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Db;
+using MVC.Helpers;
 using MVC.Models;
 
 namespace MVC.Controllers
@@ -18,8 +19,8 @@ namespace MVC.Controllers
         public IActionResult Index()
         {
             var cart = cartsRepository.TryGetByUserId(constants.UserId);
-            var cartViewModel = new CartViewModel { Id = cart.Id, Items = cart.Items.Select(x => new CartItemViewModel() { Id = x.Id, Product = x.Product, Amount = x.Quantity }).ToList(), UserId = cart.UserId };
-            return View(cartViewModel);
+
+            return View(Mapping.ToCartViewModel(cart));
         }
         public IActionResult Add(Guid productId)
         {
