@@ -6,5 +6,7 @@ namespace MVC.Db
     {
         List<Order> GetAllOrders();
         void Add(Order order);
+        Order TryGetById(Guid OrderId);
+        void UpdateStatus(Guid id, OrderStatus newStatus);
     }
 }

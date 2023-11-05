@@ -14,9 +14,9 @@ namespace MVC.Db
         public List<Order> GetAllOrders()
         {
             return databaseContext.Orders
-                .Include(x=>x.User)
-                .Include(x=>x.Items)
-                .ThenInclude(x=>x.Product)
+                .Include(x => x.User)
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
                 .ToList();
         }
         public void Add(Order order)
@@ -25,5 +25,22 @@ namespace MVC.Db
             databaseContext.SaveChanges();
         }
 
+        public Order TryGetById(Guid Id)
+        {
+            return databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefault();
+        }
+
+        public void UpdateStatus(Guid id, OrderStatus newStatus)
+        {
+            var order = TryGetById(id);
+            if (order != null)
+            {
+                order.Status = newStatus;
+            }
+            databaseContext.SaveChanges();
+        }
     }
 }

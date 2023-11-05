@@ -2,7 +2,7 @@
 using MVC.Db;
 using MVC.Db.Models;
 
-namespace MVC
+namespace MVC.Db
 {
     public class CompareDbRepository : ICompareRepository
     {
@@ -15,25 +15,45 @@ namespace MVC
         public List<Product> GetAllCompare(string userId) //Метод для получения списка продуктов для сравнения
         {
             return databaseContext.CompareProducts
-                .Where(u=>u.UserId == userId)
-                .Include(x=>x.Product)
-                .Select(x=>x.Product)
+                .Where(u => u.UserId == userId)
+                .Include(x => x.Product)
+                .Select(x => x.Product)
                 .ToList();
         }
+        /// <summary>
+        /// Метод для добавления продуктов в список для сравнения
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="product"></param>
         public void Add(string userId, Product product)
         {
-            if (!Compare.Contains(product))
+            var existingProduct = databaseContext.CompareProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == product.Id);
+            if (existingProduct == null)
             {
-                Compare.Add(product);
+                databaseContext.CompareProducts.Add(new CompareProduct() { Product = product, UserId = userId });
+                databaseContext.SaveChanges();
             }
         }
-        public void Clear()
+        /// <summary>
+        /// Метод для очистки списка сравнения конкретного пользователя
+        /// </summary>
+        /// <param name="UserId"></param>
+        public void Clear(string UserId)
         {
-            Compare.Clear();
+            var userCompareProduct = databaseContext.CompareProducts.Where(u => u.UserId == UserId).ToList();
+            databaseContext.CompareProducts.RemoveRange(userCompareProduct);
+            databaseContext.SaveChanges();
         }
-        public void Del(Product product)
+        /// <summary>
+        /// Метод для очистки переданного продукта из списка для сравнения
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="productId"></param>
+        public void Del(string UserId, Guid productId)
         {
-            Compare.Remove(product);
+            var removingCompare=databaseContext.CompareProducts.FirstOrDefault(u=>u.UserId==UserId && u.Product.Id==productId);
+            databaseContext.CompareProducts.Remove(removingCompare);
+            databaseContext.SaveChanges();
         }
     }
 }

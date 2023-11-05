@@ -26,7 +26,7 @@ namespace MVC.Areas.Admin.Controllers
             return View(currentOrder);
         }
         [HttpPost]
-        public IActionResult EditStatus(Guid id, Db.Models.OrderStatuses Status)
+        public IActionResult EditStatus(Guid id, Db.Models.OrderStatus Status)
         {
             var orders = ordersRepository.GetAllOrders();
             var currentOrder = orders.FirstOrDefault(order => order.Id == id);

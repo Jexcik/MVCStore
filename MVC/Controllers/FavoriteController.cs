@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Db;
+using MVC.Helpers;
 
 namespace MVC.Controllers
 {
@@ -18,7 +19,7 @@ namespace MVC.Controllers
         public IActionResult Index()
         {
             var favoriteList = favoriteRepository.GetAll(constants.UserId);
-            return View(favoriteList);
+            return View(Mapping.ToProductViewModels(favoriteList));
         }
         public IActionResult Add(Guid id)
         {

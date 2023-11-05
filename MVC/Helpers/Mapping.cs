@@ -18,6 +18,15 @@ namespace MVC.Helpers
                 ImagePath = product.ImagePath,
             };
         }
+        public static List<ProductViewModel> ToProductViewModels(this List<Product> products)
+        {
+            var productsViewModels = new List<ProductViewModel>();
+            foreach (var product in products)
+            {
+                productsViewModels.Add(ToProductViewModel(product));
+            }
+            return productsViewModels;
+        }
         public static CartViewModel ToCartViewModel(this Cart cart)
         {
             if (cart == null)
