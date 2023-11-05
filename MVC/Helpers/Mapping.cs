@@ -56,5 +56,38 @@ namespace MVC.Helpers
             }
             return cartItems;
         }
+
+        public static UserDeliveryInfo ToUser(this UserDeliveryInfoViewModel user)
+        {
+            return new UserDeliveryInfo
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Phone = user.Phone,
+                Address = user.Address,
+            };
+        }
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(this UserDeliveryInfo deliveryInfo)
+        {
+            return new UserDeliveryInfoViewModel
+            {
+                Name = deliveryInfo.Name,
+                Address = deliveryInfo.Address,
+                Phone = deliveryInfo.Phone
+            };
+        }
+        public static OrderViewModel ToOrderViewModel(this Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                CreateDateTime= order.CreateDateTime,
+                Status=(OrderStatusViewModel)(int)order.Status,
+                User=ToUserDeliveryInfoViewModel(order.User),
+                Items=ToCartItemViewModels(order.Items)
+
+            };
+        }
+
     }
 }

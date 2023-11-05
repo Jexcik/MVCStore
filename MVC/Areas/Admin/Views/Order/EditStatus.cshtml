@@ -9,11 +9,11 @@
             <table class="table">
                 <tr>
                     <th>Дата заказа:</th>
-                    <td>@Model.Date</td>
+                    <td>@Model.CreateDateTime</td>
                 </tr>
                 <tr>
                     <th>Время заказа:</th>
-                    <td>@Model.Time</td>
+                    <td>@Model.CreateDateTime</td>
                 </tr>
                 <tr>
                     <th>Адрес:</th>
@@ -40,26 +40,26 @@
                     <td>
                         @switch (Model.Status)
                         {
-                            case OrderStatuses.Created:
+                            case OrderStatusViewModel.Created:
                                 <p>Создан</p>
                                 ; break;
-                            case OrderStatuses.Processed:
+                            case OrderStatusViewModel.Processed:
                                 <p>Обработан</p>
                                 ; break;
-                            case OrderStatuses.Delivering:
+                            case OrderStatusViewModel.Delivering:
                                 <p>В пути</p>
                                 ; break;
-                            case OrderStatuses.Delivered:
+                            case OrderStatusViewModel.Delivered:
                                 <p>Доставлен</p>
                                 ; break;
-                            case OrderStatuses.Canceled:
+                            case OrderStatusViewModel.Canceled:
                                 <p>Отменен</p>
                                 ; break;
                         }
                     </td>
                     <td>
                         <select asp-for="@Model.Status"
-                                asp-items="@Html.GetEnumSelectList<OrderStatuses>()"
+                                asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()"
                                 class="form-control-sm">
                         </select>
                     </td>

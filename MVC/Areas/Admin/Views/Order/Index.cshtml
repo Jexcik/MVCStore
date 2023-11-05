@@ -39,27 +39,9 @@
                                     <td>@i</td>
                                     <td>@string.Format("{0:### ### ###}",order.Cost)p</td>
                                     <td>@EnumHelper.GetDisplayName(order.Status)</td>
-@*                                     @switch (order.Status)
-                                    {
-                                        case OrderStatuses.Created:
-                                            <td>Создан</td>
-                                            ; break;
-                                        case OrderStatuses.Processed:
-                                            <td>Обработан</td>
-                                            ; break;
-                                        case OrderStatuses.Delivering:
-                                            <td>В пути</td>
-                                            ; break;
-                                        case OrderStatuses.Delivered:
-                                            <td>Доставлен</td>
-                                            ; break;
-                                        case OrderStatuses.Canceled:
-                                            <td>Отменен</td>
-                                            ; break;
-                                    }
- *@                                    <td>@order.User.Name</td>
-                                    <td>@order.Date</td>
-                                    <td>@order.Time</td>
+@*                                     <td>@order.User.Name</td>
+ *@                                    <td>@order.CreateDateTime</td>
+                                    <td>@order.CreateDateTime</td>
                                     <td class="col-4 text-end">
                                         <a class="btn btn-outline-warning" asp-controller="Order" asp-action="EditStatus" asp-route-id="@order.Id"><i class="bi bi-pencil">Изменить статус</i></a>
                                     </td>

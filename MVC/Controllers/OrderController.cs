@@ -2,6 +2,7 @@
 using MVC.Models;
 using MVC.Db.Models;
 using MVC.Db;
+using MVC.Helpers;
 
 namespace MVC.Controllers
 {
@@ -20,7 +21,7 @@ namespace MVC.Controllers
         }
         public IActionResult Index()
         {
-            
+
             return View();
         }
         [HttpPost]
@@ -40,15 +41,15 @@ namespace MVC.Controllers
             }
 
             var existingCart = cartsRepository.TryGetByUserId(constants.UserId);
-            var order = new Order
+            Order order = new Order
             {
-                
-                Items = existingCart.Items,
+                User = Mapping.ToUser(user),
+                Items = existingCart.Items
 
             };
             ordersRepository.Add(order);
             cartsRepository.Clear(constants.UserId);
-            return View(order);
+            return View(Mapping.ToOrderViewModel(order));
         }
     }
 }

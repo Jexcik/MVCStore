@@ -2,42 +2,27 @@
 
 namespace MVC.Models
 {
-    public enum OrderStatuses
-    {
-        [Display(Name ="Создан")]
-        Created,
-        [Display(Name = "Обработан")]
-        Processed,
-        [Display(Name = "В пути")]
-        Delivering,
-        [Display(Name = "Доставлен")]
-        Delivered,
-        [Display(Name = "Отменен")]
-        Canceled
-    }
     public class OrderViewModel
     {
         public Guid Id { get; set; }
         public UserDeliveryInfoViewModel User { get; set; }
 
         public List<CartItemViewModel> Items { get; set; }
-        public decimal Cost
-        {
-            get
-            {
-                return Items.Sum(x => x.Cost);
-            }
-        }
-        public OrderStatuses Status { get; set; }
-        public string Time { get; set; }
-        public string Date { get; set; }
+        public OrderStatusViewModel Status { get; set; }
+        public DateTime CreateDateTime { get; set; }
 
         public OrderViewModel()
         {
             Id = Guid.NewGuid();
-            Status = OrderStatuses.Created;
-            Time = DateTime.Now.ToString("HH:mm:ss");
-            Date = DateTime.Now.ToString("dd-MM-yyyy");
+            Status = OrderStatusViewModel.Created;
+            CreateDateTime = DateTime.Now;
+        }
+        public decimal Cost
+        {
+            get
+            {
+                return Items?.Sum(x => x.Cost) ?? 0;
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace MVC.Db.Models
 
         public Order()
         {
+            Id = Guid.NewGuid();
             Status = OrderStatus.Created;
             CreateDateTime = DateTime.Now;
         }
