@@ -49,7 +49,8 @@ namespace MVC.Controllers
             };
             ordersRepository.Add(order);
             cartsRepository.Clear(constants.UserId);
-            return View(Mapping.ToOrderViewModel(order));
+            OrderViewModel orderViewModel = Mapping.ToOrderViewModel(order);
+            return View(orderViewModel);
         }
     }
 }

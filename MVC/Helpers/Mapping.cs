@@ -73,6 +73,7 @@ namespace MVC.Helpers
             {
                 Name = deliveryInfo.Name,
                 Address = deliveryInfo.Address,
+                Email = deliveryInfo.Email,
                 Phone = deliveryInfo.Phone
             };
         }

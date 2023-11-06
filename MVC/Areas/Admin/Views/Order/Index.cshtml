@@ -39,9 +39,9 @@
                                     <td>@i</td>
                                     <td>@string.Format("{0:### ### ###}",order.Cost)p</td>
                                     <td>@EnumHelper.GetDisplayName(order.Status)</td>
-@*                                     <td>@order.User.Name</td>
- *@                                    <td>@order.CreateDateTime</td>
-                                    <td>@order.CreateDateTime</td>
+                                    <td>@order.User.Name</td>
+                                    <td>@order.CreateDateTime.ToString("d")</td>
+                                    <td>@order.CreateDateTime.ToString("t")</td>
                                     <td class="col-4 text-end">
                                         <a class="btn btn-outline-warning" asp-controller="Order" asp-action="EditStatus" asp-route-id="@order.Id"><i class="bi bi-pencil">Изменить статус</i></a>
                                     </td>
