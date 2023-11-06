@@ -6,10 +6,10 @@
     <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
 
     <div class="row mb-3">
-        <label asp-for="Login" class="col-sm-1 col-form-label">Логин</label><br />
+        <label asp-for="UserName" class="col-sm-1 col-form-label">Логин</label><br />
         <div class="col-sm-3">
-            <input asp-for="Login" class="form-control" placeholder="E-Mail" />
-            <span asp-validation-for="Login"></span>
+            <input asp-for="UserName" class="form-control" placeholder="E-Mail" />
+            <span asp-validation-for="UserName"></span>
         </div>
     </div>
     <div class="row mb-3">
@@ -26,5 +26,5 @@
             <span asp-validation-for="ConfirmPassword"></span>
         </div>
     </div>
-    <button type="submit" class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="AddNewUser">Зарегистрироваться</button>
+    <button type="submit" class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
 </form>

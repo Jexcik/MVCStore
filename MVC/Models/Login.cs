@@ -6,7 +6,7 @@ namespace MVC.Models
     {
         [Required(ErrorMessage = "Не указан email")]
         [EmailAddress(ErrorMessage = "Введите валидный email")]
-        public string LoginUser { get; set; }
+        public string UserName { get; set; }
         [Required(ErrorMessage ="Введите пароль")]
         [StringLength(50,MinimumLength =8,ErrorMessage ="Пароль должен содержать от 8 до 50 символов")]
         public string Password { get; set; }
