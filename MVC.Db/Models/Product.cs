@@ -19,8 +19,9 @@ namespace MVC.Db.Models
         public string ImagePath { get; set; }
         public List<CartItem> CartItems { get; set; }
 
-        public Product() 
+        public Product()
         {
+            Id = Guid.NewGuid();
             CartItems = new List<CartItem>();
         }
 

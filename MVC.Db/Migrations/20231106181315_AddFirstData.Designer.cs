@@ -4,6 +4,7 @@ using MVC.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231106181315_AddFirstData")]
+    partial class AddFirstData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,7 +171,7 @@ namespace MVC.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("45ba062d-8570-459e-ba26-e388fab791f4"),
+                            Id = new Guid("a8f5fd0f-d612-4deb-84a3-c670e1b99c9a"),
                             Author = "Oxxxymiron",
                             Cost = 3150m,
                             Description = "Второй студийный альбом российского рэпера Oxxxymiron",
@@ -178,7 +181,7 @@ namespace MVC.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0f87a87-28d2-469c-8d50-24d228a49942"),
+                            Id = new Guid("952ca27f-6918-4840-af4f-2da84a09b388"),
                             Author = "Скриптонит",
                             Cost = 1850m,
                             Description = "Дебютный альбом",
@@ -188,7 +191,7 @@ namespace MVC.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("91d11c8b-30ab-40c2-a62a-e16fe2419e26"),
+                            Id = new Guid("529e84d9-49c7-4d0a-b9cb-049f83c43cd9"),
                             Author = "GUF",
                             Cost = 2000m,
                             Description = "Legendary Album",
@@ -198,7 +201,7 @@ namespace MVC.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2d5e0d96-f817-4959-8ef9-9a9aac6b8552"),
+                            Id = new Guid("42d35f2e-6b68-4572-a21e-cc7455bdbcdf"),
                             Author = "Баста",
                             Cost = 3000m,
                             Description = "TheBest Production",

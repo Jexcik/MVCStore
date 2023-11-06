@@ -16,7 +16,7 @@ namespace MVC.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productsDb = productsRepository.GetAll();
-            var productsViewModels=productsDb.Select(x => new ProductViewModel() { Id=x.Id, Name=x.Name, Author=x.Author, Cost=x.Cost, ReleaseYear=x.ReleaseYear, Description=x.Description, ImagePath=x.ImagePath }).ToList();
+            var productsViewModels = productsDb.Select(x => new ProductViewModel() { Id = x.Id, Name = x.Name, Author = x.Author, Cost = x.Cost, ReleaseYear = x.ReleaseYear, Description = x.Description, ImagePath = x.ImagePath }).ToList();
             return View(productsViewModels);
         }
         public IActionResult Add()
@@ -30,7 +30,7 @@ namespace MVC.Areas.Admin.Controllers
             {
                 return View("Index");
             }
-            productsRepository.Add(new Product() { Name = newProduct.Name, Author = newProduct.Author, ReleaseYear = newProduct.ReleaseYear, Cost=newProduct.Cost, Description=newProduct.Description, ImagePath=newProduct.ImagePath });
+            productsRepository.Add(new Product() { Name = newProduct.Name, Author = newProduct.Author, ReleaseYear = newProduct.ReleaseYear, Cost = newProduct.Cost, Description = newProduct.Description, ImagePath = newProduct.ImagePath });
             return RedirectToAction("Index");
         }
         public IActionResult Edit(Guid id)
@@ -41,7 +41,7 @@ namespace MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Product product, Guid id)
         {
-            productsRepository.Update(product,id);
+            productsRepository.Update(product, id);
             return RedirectToAction("Index");
         }
         public IActionResult Del(Guid id)
