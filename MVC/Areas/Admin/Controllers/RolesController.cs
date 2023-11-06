@@ -21,7 +21,7 @@ namespace MVC.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(Roles role)
+        public IActionResult Add(Role role)
         {
             var roles = rolesRepository.GetAllRoles();
             if (roles.FirstOrDefault(r => r.Name == role.Name) != null)

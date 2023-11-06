@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC;
 using MVC.Db;
+using MVC.Db.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,26 @@ var connection = builder.Configuration.GetConnectionString("MVC_Shop");
 
 //ƒобавл€ем DatabaseContext в качестве сервиса в приложение
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+//добавл€ем контекст IndentityContext в качестве сервиса в приложение
+builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
+
+// указываем тип пользовател€ и роли
+builder.Services.AddIdentity<User, IdentityRole>()
+                // устанавливаем тип хранилища - наш контекст
+                .AddEntityFrameworkStores<IdentityContext>();
+
+// настройка cookie
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.Cookie = new CookieBuilder
+    {
+        IsEssential = true
+    };
+});
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,6 +40,7 @@ builder.Services.AddTransient<IOrdersRepository, OrdersDbRepository>();
 builder.Services.AddTransient<ICompareRepository, CompareDbRepository>();
 builder.Services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<IRolesRepository, RolesInMemoryRepository>();
+builder.Services.AddSingleton<IUsersRepository, UsersInMemoryRepository>();
 builder.Services.AddSingleton<Constants>();
 
 var app = builder.Build();
@@ -35,6 +58,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//ѕодключение аутентификации
+app.UseAuthentication();
+//ѕодключение авторизации
 app.UseAuthorization();
 
 app.MapControllerRoute(

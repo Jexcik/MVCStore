@@ -4,12 +4,12 @@ namespace MVC
 {
     public class RolesInMemoryRepository : IRolesRepository
     {
-        private List<Roles> roles = new List<Roles>();
-        public List<Roles> GetAllRoles()
+        private List<Role> roles = new List<Role>();
+        public List<Role> GetAllRoles()
         {
             return roles;
         }
-        public void Add(Roles role)
+        public void Add(Role role)
         {
             if (!roles.Contains(role))
             {
@@ -17,7 +17,7 @@ namespace MVC
             }
         }
 
-        public void Del(Roles role)
+        public void Del(Role role)
         {
             roles.Remove(role);
         }

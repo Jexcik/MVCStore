@@ -2,12 +2,12 @@
 
 namespace MVC.Models
 {
-    public class Roles
+    public class Role
     {
         [Required(ErrorMessage = "Введите название роли")]
         public string Name { get; set; }
-        public Roles() { }
-        public Roles(string name)
+        public Role() { }
+        public Role(string name)
         {
             Name = name;
         }
