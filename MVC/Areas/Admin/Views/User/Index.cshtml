@@ -1,6 +1,55 @@
-﻿<div class="row">
+﻿@{
+    int i = 1;
+}
+@model List<User>
+<div class="row">
     @await Html.PartialAsync("MenuAdmin")
     <div class="col-9">
         <h3 class="text-center">Пользователи</h3>
+        <br />
+        <a class="btn btn-outline-warning" asp-area="" asp-controller="Account" asp-action="Register"><i class="bi bi-database-add"> Добавить нового пользователя </i></a>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Email</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Телефон</th>
+                            <th>Роль</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td class="col-2">
+                                    @user.Name
+                                </td>
+                                <td class="col-2">
+                                    @user.FirstName
+                                </td>
+                                <td class="col-2">
+                                    @user.LastName
+                                </td>
+                                <td class="col-2">
+                                    @user.Phone
+                                </td>
+                                <td class="col-2">
+                                    @user.Role.Name="Админ"
+                                </td>
+                                <td class="col-2">
+                                    <a class="btn btn-outline-warning" asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-userId="@user.Id">Подробнее</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ namespace MVC.Controllers
             var userAccount = usersRepository.TryGetByName(user.UserName);
             if (userAccount == null)
             {
-                ModelState.AddModelError("", "Пользователь с таким именем не найден");
+                ModelState.AddModelError("", "Пользователь с таким именем не найден. Проверьте имя или зарегестрируйтесь.");
                 return View(user);
             }
             if (userAccount.Password != user.Password)
